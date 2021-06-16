@@ -13,13 +13,13 @@ An application for a simple expression-based programming language called slisp b
 * To implement a Qt application using a variety of design techniques including dynamic polymorphism, composition, and event-driven programming.
 * To practice good code quality and coverage as well as memory leak free programming.
 
-### Concepts Covered:
+## Concepts Covered:
 
 
 ## Important Aspects and Limitations:
 
 
-### Running it locally (Vagrant VM required)
+## Running it locally (Vagrant VM required)
  
   
   
