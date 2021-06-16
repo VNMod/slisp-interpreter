@@ -1,0 +1,78 @@
+Start testing: Apr 19 16:51 UTC
+----------------------------------------------------------
+1/3 Testing: unittests
+1/3 Test: unittests
+Command: "/vagrant/unittests"
+Directory: /vagrant
+"unittests" start time: Apr 19 16:51 UTC
+Output:
+----------------------------------------------------------
+===============================================================================
+All tests passed (341 assertions in 39 test cases)
+
+<end of output>
+Test time =   0.11 sec
+----------------------------------------------------------
+Test Passed.
+"unittests" end time: Apr 19 16:51 UTC
+"unittests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/3 Testing: test_message
+2/3 Test: test_message
+Command: "/vagrant/test_message"
+Directory: /vagrant
+"test_message" start time: Apr 19 16:51 UTC
+Output:
+----------------------------------------------------------
+********* Start testing of TestMessage *********
+Config: Using QtTest library 5.9.5, Qt 5.9.5 (x86_64-little_endian-lp64 shared (dynamic) release build; by GCC 7.4.0)
+PASS   : TestMessage::initTestCase()
+PASS   : TestMessage::testConstructor()
+PASS   : TestMessage::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 1ms
+********* Finished testing of TestMessage *********
+<end of output>
+Test time =   0.10 sec
+----------------------------------------------------------
+Test Passed.
+"test_message" end time: Apr 19 16:51 UTC
+"test_message" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/3 Testing: test_gui
+3/3 Test: test_gui
+Command: "/vagrant/test_gui"
+Directory: /vagrant
+"test_gui" start time: Apr 19 16:51 UTC
+Output:
+----------------------------------------------------------
+********* Start testing of TestGUI *********
+Config: Using QtTest library 5.9.5, Qt 5.9.5 (x86_64-little_endian-lp64 shared (dynamic) release build; by GCC 7.4.0)
+PASS   : TestGUI::initTestCase()
+PASS   : TestGUI::testREPLGood()
+PASS   : TestGUI::testREPLBad()
+PASS   : TestGUI::testREPLBad2Good()
+PASS   : TestGUI::testPoint()
+PASS   : TestGUI::testLine()
+QDEBUG : TestGUI::testArc() QGraphicsItem(0x55e9edc9abb0, pos=0,0)
+QDEBUG : TestGUI::testArc() QRectF(-100.5,-100.5 201x101)
+PASS   : TestGUI::testArc()
+QDEBUG : TestGUI::testEnvRestore() QGraphicsItem(0)
+QDEBUG : TestGUI::testEnvRestore() QGraphicsItem(0)
+PASS   : TestGUI::testEnvRestore()
+PASS   : TestGUI::testMessage()
+PASS   : TestGUI::testHistory()
+PASS   : TestGUI::testreadfromfile()
+PASS   : TestGUI::cleanupTestCase()
+Totals: 12 passed, 0 failed, 0 skipped, 0 blacklisted, 5064ms
+********* Finished testing of TestGUI *********
+<end of output>
+Test time =   5.14 sec
+----------------------------------------------------------
+Test Passed.
+"test_gui" end time: Apr 19 16:51 UTC
+"test_gui" time elapsed: 00:00:05
+----------------------------------------------------------
+
+End testing: Apr 19 16:51 UTC

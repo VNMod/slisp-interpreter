@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - Coverage.combined.cleaned.mocrm - /vagrant/expression.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">vagrant</a> - expression.hpp<span style="font-size: 80%;"> (source / <a href="expression.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">Coverage.combined.cleaned.mocrm</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2021-04-19 16:53:29</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #ifndef TYPES_HPP</a>
+<span class="lineNum">       2 </span>            : #define TYPES_HPP
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : // system includes
+<span class="lineNum">       5 </span>            : #include &lt;string&gt;
+<span class="lineNum">       6 </span>            : #include &lt;vector&gt;
+<span class="lineNum">       7 </span>            : #include &lt;tuple&gt;
+<span class="lineNum">       8 </span>            : #include &lt;cmath&gt;
+<span class="lineNum">       9 </span>            : #include &lt;limits&gt;
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : // A Type is a literal boolean, literal number, or symbol
+<span class="lineNum">      12 </span>            : enum Type
+<span class="lineNum">      13 </span>            : {
+<span class="lineNum">      14 </span>            :   NoneType,
+<span class="lineNum">      15 </span>            :   BooleanType,
+<span class="lineNum">      16 </span>            :   NumberType,
+<span class="lineNum">      17 </span>            :   ListType,
+<span class="lineNum">      18 </span>            :   SymbolType,
+<span class="lineNum">      19 </span>            :   PointType,
+<span class="lineNum">      20 </span>            :   LineType,
+<span class="lineNum">      21 </span>            :   ArcType,
+<span class="lineNum">      22 </span>            :   NullType
+<span class="lineNum">      23 </span>            : };
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            : // A Boolean is a C++ bool
+<span class="lineNum">      26 </span>            : typedef bool Boolean;
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span>            : // A Number is a C++ double
+<span class="lineNum">      29 </span>            : typedef double Number;
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            : // A Symbol is a string
+<span class="lineNum">      32 </span>            : typedef std::string Symbol;
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            : // A Point is two Numbers
+<span class="lineNum">      35 </span>            : struct Point
+<span class="lineNum">      36 </span>            : {
+<a name="37"><span class="lineNum">      37 </span>            :   Number x;</a>
+<span class="lineNum">      38 </span>            :   Number y;
+<span class="lineNum">      39 </span><span class="lineCov">         44 :   bool operator==(const Point &amp;p) const</span>
+<span class="lineNum">      40 </span>            :   {
+<span class="lineNum">      41 </span><span class="lineCov">         88 :     return (fabs(x - p.x) &lt; std::numeric_limits&lt;double&gt;::epsilon()) &amp;&amp;</span>
+<span class="lineNum">      42 </span><span class="lineCov">         88 :            (fabs(y - p.y) &lt; std::numeric_limits&lt;double&gt;::epsilon());</span>
+<span class="lineNum">      43 </span>            :   }
+<span class="lineNum">      44 </span>            :   bool operator!=(const Point &amp;p) const
+<span class="lineNum">      45 </span>            :   {
+<span class="lineNum">      46 </span>            :     return !(*this == p);
+<span class="lineNum">      47 </span>            :   }
+<span class="lineNum">      48 </span>            : };
+<span class="lineNum">      49 </span>            : 
+<span class="lineNum">      50 </span>            : // A Line is two Points
+<span class="lineNum">      51 </span>            : struct Line
+<span class="lineNum">      52 </span>            : {
+<span class="lineNum">      53 </span>            :   Point first;
+<span class="lineNum">      54 </span>            :   Point second;
+<span class="lineNum">      55 </span>            : };
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            : // An Arc is a center and start point and a span angle in radians
+<span class="lineNum">      58 </span>            : struct Arc
+<span class="lineNum">      59 </span>            : {
+<span class="lineNum">      60 </span>            :   Point center;
+<span class="lineNum">      61 </span>            :   Point start;
+<span class="lineNum">      62 </span>            :   Number span;
+<span class="lineNum">      63 </span>            : };
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span>            : // A Value is a boolean, number, or symbol
+<a name="66"><span class="lineNum">      66 </span>            : // cannot use a union because symbol is non-POD</a>
+<span class="lineNum">      67 </span>            : // this wastes space but is simple
+<span class="lineNum">      68 </span><span class="lineCov">    1006200 : struct Value</span>
+<span class="lineNum">      69 </span>            : {
+<span class="lineNum">      70 </span>            :   Boolean bool_value;
+<span class="lineNum">      71 </span>            :   Number num_value;
+<span class="lineNum">      72 </span>            :   Symbol sym_value;
+<span class="lineNum">      73 </span>            :   Point point_value;
+<span class="lineNum">      74 </span>            :   Line line_value;
+<span class="lineNum">      75 </span>            :   Arc arc_value;
+<span class="lineNum">      76 </span>            : };
+<a name="77"><span class="lineNum">      77 </span>            : </a>
+<span class="lineNum">      78 </span>            : // An Atom has a type and value
+<span class="lineNum">      79 </span><span class="lineCov">    1006200 : struct Atom</span>
+<span class="lineNum">      80 </span>            : {
+<span class="lineNum">      81 </span>            :   Type type;
+<span class="lineNum">      82 </span>            :   Value value;
+<span class="lineNum">      83 </span>            : };
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span>            : // An expression is an atom called the head
+<a name="86"><span class="lineNum">      86 </span>            : // followed by a (possibly empty) list of expressions</a>
+<span class="lineNum">      87 </span>            : // called the tail
+<span class="lineNum">      88 </span><span class="lineCov">     801302 : struct Expression</span>
+<span class="lineNum">      89 </span>            : {
+<span class="lineNum">      90 </span>            :   Atom head;
+<a name="91"><span class="lineNum">      91 </span>            :   std::vector&lt;Expression&gt; tail;</a>
+<span class="lineNum">      92 </span>            : 
+<span class="lineNum">      93 </span><span class="lineCov">     129687 :   Expression()</span>
+<span class="lineNum">      94 </span><span class="lineCov">     129687 :   {</span>
+<span class="lineNum">      95 </span><span class="lineCov">     129687 :     head.type = NoneType;</span>
+<a name="96"><span class="lineNum">      96 </span><span class="lineCov">     129687 :   };</span></a>
+<span class="lineNum">      97 </span>            : 
+<span class="lineNum">      98 </span><span class="lineCov">          3 :   Expression(const Atom &amp;atom) : head(atom){};</span>
+<span class="lineNum">      99 </span>            : 
+<span class="lineNum">     100 </span>            :   Expression(bool tf);
+<span class="lineNum">     101 </span>            :   Expression(double num);
+<span class="lineNum">     102 </span>            :   Expression(const std::string &amp;sym);
+<span class="lineNum">     103 </span>            : 
+<span class="lineNum">     104 </span>            :   // Construct an Expression with a single Point atom with value
+<span class="lineNum">     105 </span>            :   Expression(std::tuple&lt;double, double&gt; value);
+<span class="lineNum">     106 </span>            : 
+<span class="lineNum">     107 </span>            :   // Construct an Expression with a single Line atom with starting
+<span class="lineNum">     108 </span>            :   // point start and ending point end
+<span class="lineNum">     109 </span>            :   Expression(std::tuple&lt;double, double&gt; start,
+<span class="lineNum">     110 </span>            :              std::tuple&lt;double, double&gt; end);
+<span class="lineNum">     111 </span>            : 
+<span class="lineNum">     112 </span>            :   // Construct an Expression with a single Arc atom with center
+<span class="lineNum">     113 </span>            :   // point center, starting point start, and spanning angle angle in radians
+<span class="lineNum">     114 </span>            :   Expression(std::tuple&lt;double, double&gt; center,
+<span class="lineNum">     115 </span>            :              std::tuple&lt;double, double&gt; start,
+<span class="lineNum">     116 </span>            :              double angle);
+<span class="lineNum">     117 </span>            : 
+<span class="lineNum">     118 </span>            :   bool operator==(const Expression &amp;exp) const noexcept;
+<span class="lineNum">     119 </span>            :   bool operator!=(const Expression &amp;exp) const noexcept;
+<span class="lineNum">     120 </span>            : };
+<span class="lineNum">     121 </span>            : 
+<span class="lineNum">     122 </span>            : // A Procedure is a C++ function pointer taking
+<span class="lineNum">     123 </span>            : // a vector of Atoms as arguments
+<span class="lineNum">     124 </span>            : typedef Expression (*Procedure)(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     125 </span>            : 
+<span class="lineNum">     126 </span>            : // format an expression for output
+<span class="lineNum">     127 </span>            : std::ostream &amp;operator&lt;&lt;(std::ostream &amp;out, const Expression &amp;exp);
+<span class="lineNum">     128 </span>            : 
+<span class="lineNum">     129 </span>            : // map a token to an Atom
+<span class="lineNum">     130 </span>            : bool token_to_atom(const std::string &amp;token, Atom &amp;atom);
+<span class="lineNum">     131 </span>            : 
+<span class="lineNum">     132 </span>            : // checks if the token is a valid list, none type or invalid bracket type
+<span class="lineNum">     133 </span>            : bool checktoken(Atom &amp;atom, std::string token, bool &amp;is_num, bool &amp;is_sym, bool &amp;is_bool, bool &amp;is_none, bool &amp;is_list, bool &amp;is_bracket);
+<span class="lineNum">     134 </span>            : 
+<span class="lineNum">     135 </span>            : // checks if the token is an invalid bracket/parenthesis
+<span class="lineNum">     136 </span>            : void checkparentheses(Atom &amp;atom, std::string token, bool &amp;is_bracket, bool &amp;checkrest);
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span>            : // checks if the token is an arithmetic, relational or logical operator:
+<span class="lineNum">     139 </span>            : void checkoperators(Atom &amp;atom, std::string token, bool &amp;is_none, bool &amp;is_list, bool &amp;checkrest);
+<span class="lineNum">     140 </span>            : 
+<span class="lineNum">     141 </span>            : // checks if the token is a logarithmic/exponential, graphical or trigonometric function:
+<span class="lineNum">     142 </span>            : void checkfunctions(Atom &amp;atom, std::string token, bool &amp;is_none, bool &amp;is_list, bool &amp;checkrest);
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span>            : // checks if the token is a special form or invalid special character
+<span class="lineNum">     145 </span>            : void specialcases(Atom &amp;atom, std::string token, bool &amp;is_none, bool &amp;is_list, bool &amp;checkrest);
+<span class="lineNum">     146 </span>            : 
+<span class="lineNum">     147 </span>            : // checks if the token is of Boolean tyoe
+<span class="lineNum">     148 </span>            : void checkBooleanAtom(Atom &amp;atom, std::string token, bool &amp;is_bool, bool &amp;checkrest);
+<span class="lineNum">     149 </span>            : 
+<span class="lineNum">     150 </span>            : // checks if the token is of Number type
+<span class="lineNum">     151 </span>            : void checkNumberAtom(Atom &amp;atom, std::string token, bool &amp;is_num, bool &amp;checkrest);
+<span class="lineNum">     152 </span>            : 
+<span class="lineNum">     153 </span>            : // checks if the token is of Symbol type
+<span class="lineNum">     154 </span>            : void checkSymbolAtom(Atom &amp;atom, std::string token, bool &amp;is_sym, bool &amp;checkrest);
+<span class="lineNum">     155 </span>            : 
+<span class="lineNum">     156 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

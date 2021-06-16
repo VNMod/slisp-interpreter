@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - Coverage.combined.cleaned.mocrm - /vagrant/tokenize.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">vagrant</a> - tokenize.cpp<span style="font-size: 80%;"> (source / <a href="tokenize.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">Coverage.combined.cleaned.mocrm</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">47</td>
+            <td class="headerCovTableEntry">47</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2021-04-19 16:53:29</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;tokenize.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : #include &lt;cctype&gt;
+<span class="lineNum">       3 </span>            : 
+<a name="4"><span class="lineNum">       4 </span>            : #include &lt;iostream&gt;</a>
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span><span class="lineCov">       2989 : TokenSequenceType tokenize(std::istream &amp;seq)</span>
+<span class="lineNum">       7 </span>            : {
+<span class="lineNum">       8 </span><span class="lineCov">       2989 :   TokenSequenceType tokens; // a deque of string type tokens</span>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">       5978 :   std::string str;</span>
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span><span class="lineCov">       2989 :   bool comment = false;</span>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineCov">      40095 :   while (std::getline(seq, str, ' ')) // find each string delimited by a space and tokenize it</span>
+<span class="lineNum">      15 </span>            :   {
+<span class="lineNum">      16 </span><span class="lineCov">      18553 :     int size = str.length();</span>
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span><span class="lineCov">      30922 :     std::string token; // start with an empty token</span>
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span><span class="lineCov">      18553 :     if (comment) // truncates everything before the newline character in a commented part of the string</span>
+<span class="lineNum">      21 </span>            :     {
+<span class="lineNum">      22 </span><span class="lineCov">       6166 :       CommentLine(str, comment);</span>
+<span class="lineNum">      23 </span>            :     }
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span><span class="lineCov">      18553 :     size = str.length();</span>
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span><span class="lineCov">      18553 :     tokenizing(token, tokens, str, comment);</span>
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span><span class="lineCov">      18553 :     if (comment) // skip the loop for each token in that commented line (until a newline character is encountered)</span>
+<span class="lineNum">      30 </span>            :     {
+<span class="lineNum">      31 </span><span class="lineCov">       6184 :       continue;</span>
+<span class="lineNum">      32 </span>            :     }
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            :     // if there exists a token to be pushed/queued, then push it. // Ex: when a number or group of characters follow ( like in &quot;(begin&quot;
+<span class="lineNum">      35 </span>            :     // Then, &quot;begin&quot; must be added as a token once all the characters of the string have been completely parsed
+<span class="lineNum">      36 </span><span class="lineCov">      12369 :     if (!token.empty())</span>
+<span class="lineNum">      37 </span>            :     {
+<span class="lineNum">      38 </span><span class="lineCov">       8135 :       tokens.push_back(token);</span>
+<span class="lineNum">      39 </span>            :     }
+<span class="lineNum">      40 </span>            :   }
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span><span class="lineCov">       5978 :   return tokens;</span>
+<a name="43"><span class="lineNum">      43 </span>            : }</a>
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span><span class="lineCov">       6166 : void CommentLine(std::string &amp;str, bool &amp;comment)</span>
+<span class="lineNum">      46 </span>            : {
+<span class="lineNum">      47 </span><span class="lineCov">       6166 :   int size = str.length();</span>
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span><span class="lineCov">      47730 :   for (int i = 0; i &lt; size; i++)</span>
+<span class="lineNum">      50 </span>            :   {
+<span class="lineNum">      51 </span><span class="lineCov">      42413 :     if (str[i] == '\n' || str[i] == 13) // if a new line or CRF character is encountered, the new string truncates this character</span>
+<span class="lineNum">      52 </span>            :     {
+<span class="lineNum">      53 </span><span class="lineCov">        849 :       int x = i + 1;</span>
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span>            :       // skip cascading newlines or carriage returns (i.e. CRF).
+<span class="lineNum">      56 </span><span class="lineCov">       1939 :       while (str[x] == '\n' || str[x] == 13)</span>
+<span class="lineNum">      57 </span>            :       {
+<span class="lineNum">      58 </span><span class="lineCov">        545 :         x++;</span>
+<span class="lineNum">      59 </span>            :       }
+<span class="lineNum">      60 </span>            : 
+<span class="lineNum">      61 </span><span class="lineCov">        849 :       str = str.substr(x, size - (x));</span>
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span>            :       // also, the previously encountered comment character ; is no longer in effect as \n was encountered
+<span class="lineNum">      64 </span>            :       // Because anything after \n is treated as a completely different expression altogether.
+<span class="lineNum">      65 </span><span class="lineCov">        849 :       comment = false;</span>
+<span class="lineNum">      66 </span><span class="lineCov">        849 :       break;</span>
+<span class="lineNum">      67 </span>            :     }
+<span class="lineNum">      68 </span>            :   }
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">       6166 : }</span></a>
+<span class="lineNum">      70 </span>            : 
+<span class="lineNum">      71 </span><span class="lineCov">      18553 : void tokenizing(std::string &amp;token, TokenSequenceType &amp;tokens, std::string &amp;str, bool &amp;comment)</span>
+<span class="lineNum">      72 </span>            : {
+<span class="lineNum">      73 </span><span class="lineCov">      18553 :   int size = str.length();</span>
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span><span class="lineCov">      61176 :   for (int i = 0; i &lt; size; i++)</span>
+<span class="lineNum">      76 </span>            :   {
+<span class="lineNum">      77 </span><span class="lineCov">      48807 :     if (comment) // break out of this loop if a comment is in effect</span>
+<span class="lineNum">      78 </span>            :     {
+<span class="lineNum">      79 </span><span class="lineCov">       5317 :       break;</span>
+<span class="lineNum">      80 </span>            :     }
+<span class="lineNum">      81 </span>            : 
+<span class="lineNum">      82 </span><span class="lineCov">      43490 :     if (str[i] == COMMENT) //if a ';' is encountered, then everything after it is a comment.</span>
+<span class="lineNum">      83 </span>            :     {
+<span class="lineNum">      84 </span><span class="lineCov">        867 :       if (!token.empty() &amp;&amp; token != &quot;;&quot;) //if a token has already built up before encountering this comment and doesn't just contain a ';'</span>
+<span class="lineNum">      85 </span>            :       {
+<span class="lineNum">      86 </span><span class="lineCov">         38 :         tokens.push_back(token); //then it's pushed back as a token (queued), and made empty</span>
+<span class="lineNum">      87 </span><span class="lineCov">         38 :         token = &quot;&quot;;</span>
+<span class="lineNum">      88 </span>            :       }
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span><span class="lineCov">        867 :       comment = true;</span>
+<span class="lineNum">      91 </span>            : 
+<span class="lineNum">      92 </span><span class="lineCov">        867 :       break;</span>
+<span class="lineNum">      93 </span>            :     }
+<span class="lineNum">      94 </span>            : 
+<span class="lineNum">      95 </span><span class="lineCov">      42623 :     if (str[i] == '\n' || str[i] == 13) // skip tokenizing the end of line character or carriage return</span>
+<span class="lineNum">      96 </span>            :     {
+<span class="lineNum">      97 </span><span class="lineCov">       1486 :       continue;</span>
+<span class="lineNum">      98 </span>            :     }
+<span class="lineNum">      99 </span>            : 
+<span class="lineNum">     100 </span><span class="lineCov">      41137 :     if (str[i] == OPEN || str[i] == CLOSE) //if a character is either '(' or ')'</span>
+<span class="lineNum">     101 </span>            :     {
+<span class="lineNum">     102 </span><span class="lineCov">      10778 :       if (!token.empty()) //if a token has already been built up before these characters,</span>
+<span class="lineNum">     103 </span>            :       {
+<span class="lineNum">     104 </span><span class="lineCov">       4392 :         tokens.push_back(token); //then it's pushed back as a token (queued), and made empty</span>
+<span class="lineNum">     105 </span><span class="lineCov">       4392 :         token = &quot;&quot;;</span>
+<span class="lineNum">     106 </span>            :       }
+<span class="lineNum">     107 </span><span class="lineCov">      10778 :       tokens.push_back(str.substr(i, 1)); //the parentheses character is pushed as a token</span>
+<span class="lineNum">     108 </span>            :     }
+<span class="lineNum">     109 </span>            :     else
+<span class="lineNum">     110 </span>            :     {
+<span class="lineNum">     111 </span><span class="lineCov">      30359 :       token += str[i]; // else, build up the token character by character</span>
+<a name="112"><span class="lineNum">     112 </span>            :     }</a>
+<span class="lineNum">     113 </span>            :   }
+<span class="lineNum">     114 </span><span class="lineCov">      18649 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

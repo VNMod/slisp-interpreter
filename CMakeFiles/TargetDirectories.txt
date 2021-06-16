@@ -1,0 +1,15 @@
+/vagrant/CMakeFiles/edit_cache.dir
+/vagrant/CMakeFiles/test.dir
+/vagrant/CMakeFiles/tidy.dir
+/vagrant/CMakeFiles/sldraw.dir
+/vagrant/CMakeFiles/slisp.dir
+/vagrant/CMakeFiles/unittests.dir
+/vagrant/CMakeFiles/rebuild_cache.dir
+/vagrant/CMakeFiles/test_gui.dir
+/vagrant/CMakeFiles/coverage.dir
+/vagrant/CMakeFiles/test_message.dir
+/vagrant/CMakeFiles/sldraw_autogen.dir
+/vagrant/CMakeFiles/slisp_autogen.dir
+/vagrant/CMakeFiles/unittests_autogen.dir
+/vagrant/CMakeFiles/test_gui_autogen.dir
+/vagrant/CMakeFiles/test_message_autogen.dir

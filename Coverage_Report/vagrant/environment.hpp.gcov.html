@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - Coverage.combined.cleaned.mocrm - /vagrant/environment.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">vagrant</a> - environment.hpp<span style="font-size: 80%;"> (source / <a href="environment.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">Coverage.combined.cleaned.mocrm</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2021-04-19 16:53:29</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #ifndef ENVIRONMENT_HPP</a>
+<span class="lineNum">       2 </span>            : #define ENVIRONMENT_HPP
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : // system includes
+<span class="lineNum">       5 </span>            : #include &lt;map&gt;
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : // module includes
+<a name="8"><span class="lineNum">       8 </span>            : #include &quot;expression.hpp&quot;</a>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">       2208 : class Environment</span>
+<span class="lineNum">      11 </span>            : {
+<span class="lineNum">      12 </span>            : private:
+<span class="lineNum">      13 </span>            :   // Environment is a mapping from symbols to expressions or procedures
+<span class="lineNum">      14 </span>            :   enum EnvResultType
+<span class="lineNum">      15 </span>            :   {
+<span class="lineNum">      16 </span>            :     ExpressionType,
+<a name="17"><span class="lineNum">      17 </span>            :     ProcedureType</a>
+<span class="lineNum">      18 </span>            :   };
+<span class="lineNum">      19 </span><span class="lineCov">     371130 :   struct EnvResult</span>
+<span class="lineNum">      20 </span>            :   {
+<span class="lineNum">      21 </span>            :     EnvResultType type;
+<span class="lineNum">      22 </span>            :     Expression exp;
+<span class="lineNum">      23 </span>            :     Procedure proc;
+<span class="lineNum">      24 </span>            :   };
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span>            :   std::map&lt;Symbol, EnvResult&gt; envmap;
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span>            : public:
+<span class="lineNum">      29 </span>            :   // default constructor that initializes the default environment
+<span class="lineNum">      30 </span>            :   Environment();
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            :   // inserting the mappings for keywords
+<span class="lineNum">      33 </span>            :   void keywords();
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span>            :   // inserting the mappings for logical procedures
+<span class="lineNum">      36 </span>            :   void logicalprocedures();
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span>            :   // inserting the mappings for comparison procedures
+<span class="lineNum">      39 </span>            :   void comparisonprocedures();
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span>            :   // inserting the mappings for basic arithmetic procedures
+<span class="lineNum">      42 </span>            :   void basicarithmeticprocedures();
+<span class="lineNum">      43 </span>            : 
+<span class="lineNum">      44 </span>            :   // inserting the mappings for logarithmic and power procedures
+<span class="lineNum">      45 </span>            :   void lognpowprocedures();
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            :   // inserting the mappings for graphic procedures
+<span class="lineNum">      48 </span>            :   void graphicprocedures();
+<span class="lineNum">      49 </span>            : 
+<span class="lineNum">      50 </span>            :   // inserting the mappinds for trigonometric procedures
+<span class="lineNum">      51 </span>            :   void trigonometricprocedures();
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span>            :   // inserting the mappings for special expressions like PI
+<span class="lineNum">      54 </span>            :   void specialexpressions();
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span>            :   // returns the procedure (of an EnvResult object in the existing environment) for a given Symbol
+<span class="lineNum">      57 </span>            :   Procedure searchProc(Symbol x);
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            :   // returns the equivalent expression value (as stored in the default environment) for a given symbol such as &quot;pi&quot;
+<span class="lineNum">      60 </span>            :   Expression searchExp(Symbol pi);
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span>            :   // inserts a mapping into the environment for a given symbol and expression
+<span class="lineNum">      63 </span>            :   void insertexp(Symbol x, Expression y);
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span>            :   // inserts a mapping into the environment for a given symbol and procedure
+<span class="lineNum">      66 </span>            :   void insertproc(Symbol x, Procedure y);
+<a name="67"><span class="lineNum">      67 </span>            : </a>
+<span class="lineNum">      68 </span>            :   // checks if there is an existing mapping within the environment for a given symbol
+<span class="lineNum">      69 </span><span class="lineCov">        860 :   bool check(Symbol x)</span>
+<span class="lineNum">      70 </span>            :   {
+<span class="lineNum">      71 </span><span class="lineCov">        860 :     std::map&lt;Symbol, EnvResult&gt;::iterator it;</span>
+<span class="lineNum">      72 </span>            : 
+<span class="lineNum">      73 </span><span class="lineCov">        860 :     bool flag = false;</span>
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span><span class="lineCov">        860 :     it = envmap.find(x);</span>
+<span class="lineNum">      76 </span><span class="lineCov">        860 :     if (it != envmap.end()) //if found, map is returned</span>
+<span class="lineNum">      77 </span>            :     {
+<span class="lineNum">      78 </span><span class="lineCov">        451 :       flag = true;</span>
+<span class="lineNum">      79 </span>            :     }
+<span class="lineNum">      80 </span>            : 
+<span class="lineNum">      81 </span><span class="lineCov">        860 :     return flag;</span>
+<span class="lineNum">      82 </span>            :   }
+<span class="lineNum">      83 </span>            : 
+<span class="lineNum">      84 </span>            :   // returns the environment mapping for a given symbol
+<span class="lineNum">      85 </span>            :   std::map&lt;Symbol, EnvResult&gt; search(Symbol x)
+<span class="lineNum">      86 </span>            :   {
+<span class="lineNum">      87 </span>            :     std::map&lt;Symbol, EnvResult&gt;::iterator it;
+<span class="lineNum">      88 </span>            : 
+<span class="lineNum">      89 </span>            :     it = envmap.find(x);
+<span class="lineNum">      90 </span>            :     if (it != envmap.end()) //if found, map is returned
+<span class="lineNum">      91 </span>            :     {
+<span class="lineNum">      92 </span>            :       return envmap;
+<span class="lineNum">      93 </span>            :     }
+<span class="lineNum">      94 </span>            :   }
+<a name="95"><span class="lineNum">      95 </span>            : </a>
+<span class="lineNum">      96 </span>            :   // returns the EnvResult (value) from an existing mapping in the environment for a given symbol (key)
+<span class="lineNum">      97 </span><span class="lineCov">        350 :   EnvResult &amp;operator[](const Symbol &amp;x)</span>
+<span class="lineNum">      98 </span>            :   {
+<span class="lineNum">      99 </span><span class="lineCov">        350 :     std::map&lt;Symbol, EnvResult&gt;::iterator it;</span>
+<span class="lineNum">     100 </span>            : 
+<span class="lineNum">     101 </span><span class="lineCov">        350 :     it = envmap.find(x);</span>
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span><span class="lineCov">        350 :     return it-&gt;second;</span>
+<span class="lineNum">     104 </span>            :   }
+<a name="105"><span class="lineNum">     105 </span>            : </a>
+<span class="lineNum">     106 </span>            :   // clears the 'envmap' Environment variable
+<span class="lineNum">     107 </span><span class="lineCov">         14 :   void clearmap()</span>
+<span class="lineNum">     108 </span>            :   {
+<span class="lineNum">     109 </span><span class="lineCov">         14 :     envmap.clear();</span>
+<span class="lineNum">     110 </span><span class="lineCov">         14 :   }</span>
+<span class="lineNum">     111 </span>            : };
+<span class="lineNum">     112 </span>            : 
+<span class="lineNum">     113 </span>            : // List of functions that find the procedure to be performed on a given vector of Atom type arguments
+<span class="lineNum">     114 </span>            : // and returns the resultant expression on performing this procedure.
+<span class="lineNum">     115 </span>            : 
+<span class="lineNum">     116 </span>            : Expression not_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     117 </span>            : Expression and_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     118 </span>            : Expression or_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     119 </span>            : Expression lessthan_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     120 </span>            : Expression lessthaneq_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     121 </span>            : Expression greaterthan_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     122 </span>            : Expression greaterthaneq_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     123 </span>            : Expression equal_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     124 </span>            : Expression add_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     125 </span>            : Expression sub_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     126 </span>            : Expression mul_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     127 </span>            : Expression div_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     128 </span>            : Expression Log10_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     129 </span>            : Expression pow_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     130 </span>            : Expression point_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     131 </span>            : Expression line_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     132 </span>            : Expression arc_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     133 </span>            : Expression sin_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     134 </span>            : Expression cos_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     135 </span>            : Expression arctan_proc(const std::vector&lt;Atom&gt; &amp;args);
+<span class="lineNum">     136 </span>            : 
+<span class="lineNum">     137 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
