@@ -87,7 +87,7 @@ An application for a simple expression-based programming language called slisp b
 
 ```./slisp```
 
-- This prints a **slisp>** prompt and waits for the user to type an expression onto standard input. The entered expression is then evaluated and the expression is printed. 
+- This prints a **slisp>** prompt and waits for the user to type an expression onto standard input. The entered expression is then evaluated and its resultant expression is printed. 
 - In case of a semantic error, the environment reverts to a state prior to the recent evaluation.
 - After printing the result, the REPL prompts the user with **slisp>** again for another expression.
 - To exit the REPL, the user must type in the EOF character.
@@ -102,10 +102,16 @@ An application for a simple expression-based programming language called slisp b
 
 
 - This GUI interface is initiated with the following command in the terminal:
-```./sldraw``
+```./sldraw```
 
   
 ## Running it locally (Vagrant VM required)
  
+ - The repository contains a Vagrantfile that sets up the virtual machine with minimal graphical interaction enabled.
+ - Initialize the environment with ```vagrant up```.
+ - Reboot the machine using ```vagrant halt```, followed by ```vagrant up``` (only required to be done once when the vagrant environment is being created for the first time).
+
+- Use ```cd /vagrant``` to navigate to the right directory. Then ```cmake /vagrant``` and ```make``` to build the required configuration files.
+- Then, run the appropriate interface using either ```./slisp``` or ```./sldraw``` as mentioned above.
   
   
